@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Where's Your Fire? · Otherside</title>
+<meta name="description" content="A 2-minute diagnostic for the successful man who feels stuck. Find where your fire is — and what's keeping you from your next level.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0b0e; --panel:#15171d; --panel2:#1c1f28; --line:#2a2f3a;
+    --ink:#eceae4; --muted:#9aa1ad; --faint:#6b7280; --gold:#e0b445;
+    --fire1:#e4262b; --fire2:#f47c20; --fire3:#ffce1f;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{background:radial-gradient(120% 80% at 50% -10%,rgba(228,38,43,.14),transparent 60%),radial-gradient(90% 60% at 50% 110%,rgba(244,124,32,.10),transparent 55%),var(--bg)}
+  .app{max-width:600px;margin:0 auto;padding:26px 20px 60px;min-height:100vh;display:flex;flex-direction:column}
+  h1,h2,h3{font-family:'Cinzel',Georgia,serif;font-weight:600;margin:0;letter-spacing:.01em}
+  .brand{font-size:11px;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:auto;padding-top:6px}
+  .flame{text-align:center;font-size:30px;margin:14px 0 6px;filter:drop-shadow(0 0 14px rgba(244,124,32,.5))}
+
+  .screen{display:none;animation:fade .4s ease}
+  .screen.on{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  .intro{text-align:center;margin:auto 0}
+  .intro h1{font-size:33px;line-height:1.12;margin-bottom:14px;background:linear-gradient(180deg,#fff,#e7c98b);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .intro p{color:var(--muted);font-size:15.5px;max-width:440px;margin:0 auto 8px}
+  .intro .meta{color:var(--faint);font-size:12.5px;letter-spacing:.04em;margin-top:16px}
+
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;border:none;cursor:pointer;font-family:'Inter',sans-serif;font-weight:600;font-size:15.5px;padding:15px 22px;border-radius:12px;transition:.16s;text-decoration:none}
+  .btn.primary{background:linear-gradient(180deg,#f2903a,#df5a1e);color:#fff;box-shadow:0 8px 26px -10px rgba(244,124,32,.7)}
+  .btn.primary:hover{transform:translateY(-1px);box-shadow:0 12px 30px -10px rgba(244,124,32,.85)}
+  .btn.ghost{background:transparent;color:var(--muted);border:1px solid var(--line);box-shadow:none}
+  .btn.ghost:hover{border-color:var(--gold);color:var(--ink)}
+  .btn.sm{width:auto;padding:11px 18px;font-size:14px}
+  .btnrow{margin-top:22px}
+
+  .top{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+  .bar{flex:1;height:5px;background:var(--panel2);border-radius:6px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--fire1),var(--fire2),var(--fire3));transition:width .3s ease}
+  .count{font-size:12px;color:var(--faint);white-space:nowrap;font-variant-numeric:tabular-nums}
+
+  .track-tag{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--fire2);margin-bottom:8px;font-weight:600}
+  .qtext{font-size:22px;line-height:1.28;margin-bottom:22px;color:#fff;font-family:'Cinzel',serif}
+  .opts{display:flex;flex-direction:column;gap:10px}
+  .opt{text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:15px 16px;color:var(--ink);font-size:15px;cursor:pointer;transition:.14s;line-height:1.4}
+  .opt:hover{border-color:var(--fire2);background:var(--panel2);transform:translateX(2px)}
+  .opt:active{transform:scale(.99)}
+  .back{margin-top:18px;background:none;border:none;color:var(--faint);font-size:13px;cursor:pointer;padding:6px}
+  .back:hover{color:var(--muted)}
+
+  .email{text-align:center;margin:auto 0}
+  .email h2{font-size:25px;margin-bottom:10px;color:#fff}
+  .email p{color:var(--muted);font-size:14.5px;max-width:400px;margin:0 auto 20px}
+  .email input{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:15px 16px;color:var(--ink);font-size:16px;text-align:center;margin-bottom:12px;font-family:inherit}
+  .email input:focus{outline:none;border-color:var(--fire2)}
+
+  .result{margin:6px 0}
+  .result .rkick{text-align:center;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+  .result h2{font-size:30px;text-align:center;line-height:1.14;margin-bottom:8px;background:linear-gradient(180deg,#fff,#eab765);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .result .sub{text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:#e4dcc9;margin-bottom:22px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:22px}
+  .chip{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:7px 13px;font-size:12.5px;color:var(--muted)}
+  .chip b{color:#fff;font-weight:600}
+  .chip.edge{border-color:var(--fire2)}
+  .rbody{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--fire2);border-radius:12px;padding:18px;font-size:15px;color:var(--ink);margin-bottom:16px}
+  .rx{text-align:center;color:var(--muted);font-size:14px;margin-bottom:12px}
+  .fine{text-align:center;color:var(--faint);font-size:11.5px;margin-top:18px}
+  .restart{display:block;margin:16px auto 0;background:none;border:none;color:var(--faint);font-size:12.5px;cursor:pointer;text-decoration:underline}
+  .foot{margin-top:auto;padding-top:26px;text-align:center;color:var(--faint);font-size:11px;letter-spacing:.03em}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="brand">Otherside</div>
+
+  <div class="screen on" id="s-intro">
+    <div class="intro">
+      <div class="flame">🔥</div>
+      <h1>Where's Your Fire?</h1>
+      <p>A 2-minute diagnostic for the man who's built the life — and quietly stopped feeling it.</p>
+      <p>Find where your fire is across the four things that matter: your money, your intimacy, your self, and your brotherhood — and the one move that reignites it.</p>
+      <div class="btnrow"><button class="btn primary" onclick="start()">Find my fire →</button></div>
+      <div class="meta">8 questions · no right answers · brutally honest works best</div>
+    </div>
+  </div>
+
+  <div class="screen" id="s-quiz">
+    <div class="top">
+      <div class="bar"><i id="bar"></i></div>
+      <div class="count" id="count">1 / 8</div>
+    </div>
+    <div class="track-tag" id="tracktag"></div>
+    <div class="qtext" id="qtext"></div>
+    <div class="opts" id="opts"></div>
+    <button class="back" id="backbtn" onclick="back()">← back</button>
+  </div>
+
+  <div class="screen" id="s-email">
+    <div class="email">
+      <div class="flame">🔥</div>
+      <h2>Your Fire Reading is ready</h2>
+      <p>Where should we send it? You'll get your full reading plus the one next step for your stage.</p>
+      <input type="email" id="emailInput" placeholder="you@email.com" autocomplete="email">
+      <button class="btn primary" onclick="submitEmail()">Reveal my reading →</button>
+      <button class="btn ghost sm" style="margin-top:10px" onclick="showResult()">Skip — just show me</button>
+    </div>
+  </div>
+
+  <div class="screen" id="s-result">
+    <div class="result">
+      <div class="rkick">Your Fire Reading</div>
+      <h2 id="rtitle"></h2>
+      <div class="sub" id="rsub"></div>
+      <div class="chips" id="rchips"></div>
+      <div class="rbody" id="rbody"></div>
+      <div class="rx" id="rrx"></div>
+      <a class="btn primary" id="rcta" href="#" target="_blank" rel="noopener">Next step</a>
+      <a class="btn ghost sm" id="rcta2" href="#" target="_blank" rel="noopener" style="margin-top:10px;display:none"></a>
+      <button class="restart" onclick="restart()">start over</button>
+      <div class="fine">Self-reported and directional — not a diagnosis. Your reading reflects where your fire sits today.</div>
+    </div>
+  </div>
+
+  <div class="foot">Otherside · Where's Your Fire?</div>
+</div>
+
+<script>
+var CONFIG = {
+  formEndpoint: "",
+  urls: {
+    penetrate: "https://joinotherside.com",
+    erupt:     "https://erupt.joinotherside.com",
+    reborn:    "https://joinotherside.com",
+    journeyman:"https://joinotherside.com"
+  }
+};
+
+var Q = [
+  {track:"Money & Work", t:"Your income right now is…", o:[
+    ["Good on paper — but plateaued; I can't break the ceiling",1],
+    ["Up and down; I stall or sabotage when it counts",2],
+    ["Growing fast but chaotic — I chase and burn",3],
+    ["Flowing with less effort than it used to take",4],
+    ["Abundant, and in service of a mission bigger than me",5]]},
+  {track:"Money & Work", t:"When you think about money, the honest feeling is…", o:[
+    ["Never enough, no matter what I hit",1],
+    ["Anxiety or guilt",2],
+    ["Hunger — I want to dominate",3],
+    ["Calm — it comes from who I am now",4],
+    ["Stewardship — I build and I give",5]]},
+  {track:"Intimacy & Women", t:"Your intimate life is…", o:[
+    ["Performing on the outside, disconnected underneath",1],
+    ["Chasing or avoiding; it runs me",2],
+    ["Magnetic again — but volatile, and I use it",3],
+    ["Deep, chosen, present — I lead from wholeness",4],
+    ["Devotional; our union fuels a shared mission",5]]},
+  {track:"Intimacy & Women", t:"In your closest relationship you most often…", o:[
+    ["Keep the mask on / keep the peace",1],
+    ["Collapse, chase, or shut down",2],
+    ["Feel the charge but act it out",3],
+    ["Hold boundaries without losing the connection",4],
+    ["Model potent, present love for others",5]]},
+  {track:"Self & Body", t:"Most days you live…", o:[
+    ["In my head — numb, busy, a bit hollow",1],
+    ["Reactive — anxious or on edge",2],
+    ["Fired up but volatile / quick to anger",3],
+    ["Grounded, clear, at home in myself",4],
+    ["Sovereign — steady enough to steady others",5]]},
+  {track:"Self & Body", t:"The truest sentence right now…", o:[
+    ["“I've done everything right — why do I feel like this?”",1],
+    ["“I'm running from something I won't look at.”",2],
+    ["“I feel alive again — and a little dangerous.”",3],
+    ["“I'm not performing anymore, and it works better.”",4],
+    ["“My life is a kingdom I steward.”",5]]},
+  {track:"Brotherhood", t:"Other men in your life are…", o:[
+    ["I'm alone at the top; no one really knows me",1],
+    ["Mostly competition or surface",2],
+    ["I respect strength but keep my guard up",3],
+    ["Real brothers who've seen me low and held me",4],
+    ["Men I lead and raise",5]]},
+  {track:"Brotherhood", t:"A brotherhood that's seen you at your lowest feels…", o:[
+    ["Foreign — I don't do that",1],
+    ["Terrifying — but I know I need it",2],
+    ["Intriguing",3],
+    ["Like home",4],
+    ["Like my responsibility to build",5]]}
+];
+
+var i=0, ans=[];
+
+function show(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on')});document.getElementById(id).classList.add('on');window.scrollTo(0,0);}
+function start(){i=0;ans=[];render();show('s-quiz');}
+function render(){
+  var q=Q[i];
+  document.getElementById('tracktag').textContent=q.track;
+  document.getElementById('qtext').textContent=q.t;
+  document.getElementById('count').textContent=(i+1)+' / '+Q.length;
+  document.getElementById('bar').style.width=((i)/Q.length*100)+'%';
+  document.getElementById('backbtn').style.visibility = i===0 ? 'hidden':'visible';
+  var box=document.getElementById('opts');box.innerHTML='';
+  q.o.forEach(function(pair){
+    var b=document.createElement('button');b.className='opt';b.textContent=pair[0];
+    b.onclick=function(){pick(pair[1]);};
+    box.appendChild(b);
+  });
+}
+function pick(v){ans[i]=v;i++;if(i>=Q.length){document.getElementById('bar').style.width='100%';show('s-email');}else{render();}}
+function back(){if(i>0){i--;render();show('s-quiz');}}
+
+function scores(){
+  var m=(ans[0]+ans[1])/2, in_=(ans[2]+ans[3])/2, se=(ans[4]+ans[5])/2, br=(ans[6]+ans[7])/2;
+  return {money:m, intimacy:in_, self:se, brother:br, all:(m+in_+se+br)/4};
+}
+function stage(v){ if(v<2.5) return "Furnace"; if(v<3.5) return "Wildfire"; if(v<4.5) return "Flame"; return "Sun"; }
+
+var RESULTS = {
+  furnace:{acc:"#f47c20", title:"You're in the Furnace",
+    sub:"Fire harnessed to produce — and you've produced. But you've gone numb to the flame that drives you.",
+    body:"You've built the life on paper and feel almost none of it. That isn't burnout — it's a fire turned down to a pilot light. The good news: it isn't gone. It's one reignition away.",
+    rx:"Start by proving it's still there.", cta:["Feel the first spark → Penetrate ($11)","penetrate"], cta2:["Or go straight to ignition → Erupt","erupt"]},
+  split:{acc:"#57a846", title:"Winning Outside, Starving Inside",
+    sub:"A Flame in your business. A Furnace — or colder — in your soul.",
+    body:"Your success is real, and it's quietly starving the rest of you. More strategy won't close this gap, because the gap was never strategic — it's the fire you cut off to win. Reclaim it, and the same drive that built the business rebuilds the man.",
+    rx:"You're ready for the crossing.", cta:["Book your crossing → Reborn","reborn"]},
+  untamed:{acc:"#e4262b", title:"Lit — but Untamed",
+    sub:"The fire's back. But raw Wildfire burns what it doesn't forge.",
+    body:"You've got power and momentum again — and it's volatile. Left unforged it costs you: relationships, focus, the very wins it creates. The work now isn't more fire. It's the container that turns wildfire into a blade.",
+    rx:"Forge it before it costs you.", cta:["Book your crossing → Reborn","reborn"]},
+  crossed:{acc:"#f47b5c", title:"You've Crossed — Now Reign",
+    sub:"Integrated across the board. The rare air.",
+    body:"You've done the descent and come back whole. The risk at this altitude isn't collapse — it's drift, and the quiet loneliness of the summit. Fire left untended goes out, and you weren't built to reign alone.",
+    rx:"Tend the flame and lead.", cta:["Request an invite → Journeyman","journeyman"]}
+};
+
+function readingKey(s){
+  if(Math.min(s.money,s.intimacy,s.self,s.brother) >= 3.5) return "crossed";
+  if(s.money >= 3.5 && Math.min(s.self,s.intimacy) <= 2.5) return "split";
+  if(s.all <= 2.3) return "furnace";
+  return "untamed";
+}
+
+function submitEmail(){
+  var email=(document.getElementById('emailInput').value||'').trim();
+  if(email && CONFIG.formEndpoint){
+    try{
+      fetch(CONFIG.formEndpoint,{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({email:email, scores:scores(), reading:readingKey(scores())})});
+    }catch(e){}
+  }
+  showResult();
+}
+
+function showResult(){
+  var s=scores(), key=readingKey(s), r=RESULTS[key];
+  document.getElementById('rtitle').textContent=r.title;
+  document.getElementById('rsub').textContent=r.sub;
+  var tracks=[["Money",s.money],["Intimacy",s.intimacy],["Self",s.self],["Brotherhood",s.brother]];
+  var lowest=tracks.slice().sort(function(a,b){return a[1]-b[1];})[0][0];
+  var chips=document.getElementById('rchips');chips.innerHTML='';
+  tracks.forEach(function(t){
+    var c=document.createElement('div');c.className='chip'+(t[0]===lowest?' edge':'');
+    c.innerHTML=t[0]+': <b>'+stage(t[1])+'</b>';chips.appendChild(c);
+  });
+  var edge=document.createElement('div');edge.className='chip edge';edge.innerHTML='Growth edge: <b>'+lowest+'</b>';chips.appendChild(edge);
+  document.getElementById('rbody').textContent=r.body;
+  document.getElementById('rbody').style.borderLeftColor=r.acc;
+  document.getElementById('rrx').textContent=r.rx;
+  var cta=document.getElementById('rcta');cta.textContent=r.cta[0];cta.href=CONFIG.urls[r.cta[1]];
+  var cta2=document.getElementById('rcta2');
+  if(r.cta2){cta2.style.display='inline-flex';cta2.textContent=r.cta2[0];cta2.href=CONFIG.urls[r.cta2[1]];}
+  else{cta2.style.display='none';}
+  show('s-result');
+}
+function restart(){document.getElementById('emailInput').value='';start();}
+</script>
+</body>
+</html>
